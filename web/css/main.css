@@ -1,3 +1,48 @@
 body{
-    background-color:green;
+    font-size:16px;
 }
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration:none;
+}
+
+/* start #top-page-header */
+#top-page-header{
+    background-color:#000;
+
+}
+#top-page-header a{
+    color:white !important;
+}
+#top-page-header section{
+     display:flex;
+     justify-content: space-between;
+ }
+#top-page-header aside{
+    flex:1;
+}
+#top-page-header .header-right{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#top-page-header .header-right a{
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+#top-page-header .fa-facebook{
+    color:#3b5998;
+}
+#top-page-header .fa-instagram{
+    color:#dd4b39;
+}
+#top-page-header .fa-twitter{
+    color:#00aced;
+}
+#top-page-header .fa-youtube{
+    color:#bb0000;
+}
+/* end #top-page-header */
