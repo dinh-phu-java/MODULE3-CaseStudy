@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-@WebServlet(name = "UserController",urlPatterns = "/user-action")
+@WebServlet(name = "UserController",urlPatterns = {"/user-action","/user-control"})
 public class UserController extends HttpServlet {
     private static IUserServices userServices=new UserServices();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
