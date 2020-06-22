@@ -75,10 +75,25 @@ public class UserController extends HttpServlet {
                 url="/views/thanks.jsp";
             }else{
                 //kiem tra ko co moi insert
-
+                ArrayList<User>  existUserList=new ArrayList<>(userServices.selectAllUser());
+                boolean checkDuplicateUser=false;
+                for (User user : existUserList) {
+                    if (email.equalsIgnoreCase(user.getEmail()) || userName.equals(user.getUserName())){
+                        if (email.equalsIgnoreCase(user.getEmail())){
+                            message.add("Email already in use!");
+                        }
+                        if (userName.equalsIgnoreCase(user.getUserName())){
+                            message.add("user name already exists");
+                        }
+                        checkDuplicateUser=true;
+                        break;
+                    }
+                }
+                if (!checkDuplicateUser){
+                    
+                }
+                url="/views/thanks.jsp";
             }
-//            ArrayList<User>  existUserList=new ArrayList<>(userServices.selectAllUser());
-
         }else{
             if (!emailCheck){
                 message.add("Email incorrect!");

@@ -30,12 +30,13 @@ public class UserServices implements IUserServices{
         Connection connection=getConnection();
         boolean insertRow=false;
         try {
+            String hashPassword=PasswordUtil.hashPassword(user.getPassword());
             PreparedStatement preparedStatement=connection.prepareStatement(insertUserStatement);
             preparedStatement.setInt(1,user.getId());
             preparedStatement.setString(2,user.getFullName());
             preparedStatement.setString(3,user.getUserName());
             preparedStatement.setString(4,user.getEmail());
-            preparedStatement.setString(5,user.getPassword());
+            preparedStatement.setString(5, hashPassword);
             preparedStatement.setString(6,user.getAddress());
             preparedStatement.setInt(7,user.getPermission());
 
