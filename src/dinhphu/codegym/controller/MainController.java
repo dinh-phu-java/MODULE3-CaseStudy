@@ -26,6 +26,9 @@ public class MainController extends HttpServlet {
             case "register-user":
                 url="/views/register_user.jsp";
                 break;
+            case "login":
+                url="/views/login.jsp";
+                break;
             default:
                 url="/views/home.jsp";
                 break;

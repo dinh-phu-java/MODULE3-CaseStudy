@@ -2,7 +2,8 @@
 <article id="top-page-header" class="container-fluid">
     <section class="container">
         <aside class="header-left">
-            <a href="<c:url value="/home?action=register-user"/>">sign in / join</a>
+            <a href="<c:url value="/register-user?action=register-user"/>"><i class="fas fa-users-cog"></i> sign in / join</a>
+            <a href="<c:url value="/register-user?action=login"/>" style="margin-left:10px"><i class="fas fa-sign-in-alt"></i> login</a>
         </aside>
         <aside class="header-right">
             <a href="#"><i class="fab fa-facebook"></i></a>
