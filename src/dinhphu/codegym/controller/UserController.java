@@ -89,8 +89,13 @@ public class UserController extends HttpServlet {
                         break;
                     }
                 }
+
                 if (!checkDuplicateUser){
-                    
+                    if (userServices.insertUser(insertUser)){
+                        message.add("Inserted User Completed");
+                    }else{
+                        message.add("Can't insert user");
+                    }
                 }
                 url="/views/thanks.jsp";
             }
@@ -99,7 +104,7 @@ public class UserController extends HttpServlet {
                 message.add("Email incorrect!");
             }
             if (!userCheck){
-                message.add("user name only contain lower word and digit");
+                message.add("user name only contain lower case and digit");
             }
             if (!passwordCheck){
                 message.add("Password is not match");

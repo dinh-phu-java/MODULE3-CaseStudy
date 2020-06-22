@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-md navbar-light bg-red sticky-top" >
     <div class="container">
         <button class="navbar-toggler" data-toggle="collapse" type="button" data-target="#navbarResponsive">
@@ -7,7 +8,7 @@
         <div class="collapse navbar-collapse my-nav-child" id="navbarResponsive">
             <ul class="navbar-nav" >
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Home</a>
+                    <a href="<c:url value="/home"/>" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">About</a>

@@ -10,11 +10,18 @@
 <html>
 <head>
     <title>Thanks</title>
+    <c:import  url="parts/head.jsp" />
 </head>
 <body>
-    <c:forEach items="${message}" var="m">
-        <p>${m}</p>
-    </c:forEach>
+
+<c:import url="parts/navbar.jsp"/>
+
+<c:forEach items="${message}" var="m">
+    <p>${m}</p>
+</c:forEach>
+
+<c:import url="parts/footer.jsp"/>
+
 
 </body>
 </html>
