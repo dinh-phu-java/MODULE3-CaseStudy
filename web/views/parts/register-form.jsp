@@ -13,16 +13,21 @@
                         <input type="hidden" name="action" value="register">
                         <div class="form-group">
                             <label for="fullName" class="col-form-label required">Full Name</label>
-                            <input name="fullName" type="text" class="form-control" id="fullName" placeholder="Your Name" required>
+                            <input name="fullName" type="text" class="form-control" id="fullName" placeholder="Full Name" required>
                         </div>
                         <div class="form-group">
                             <label for="userName" class="col-form-label required">User Name</label>
-                            <input name="userName" type="text" class="form-control" id="userName" placeholder="Your Name" required>
+                            <input name="userName" type="text" class="form-control" id="userName" placeholder="User Name" required>
                         </div>
                         <!--end form-group-->
                         <div class="form-group">
                             <label for="email" class="col-form-label required">Email</label>
                             <input name="email" type="email" class="form-control" id="email" placeholder="Your Email" required>
+                        </div>
+                        <!--end form-group-->
+                        <div class="form-group">
+                            <label for="address" class="col-form-label required">Address</label>
+                            <input name="address" type="text" class="form-control" id="address" placeholder="Your Address" required>
                         </div>
                         <!--end form-group-->
                         <div class="form-group">

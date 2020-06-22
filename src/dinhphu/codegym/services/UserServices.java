@@ -11,6 +11,7 @@ public class UserServices implements IUserServices{
     private static final String userHost="root";
     private static final String passwordHost="qazWSX1@";
     private static final String selectAllUserStatement="select * from users";
+    private static final String insertUserStatement="insert into users(user_id,full_name,username,email,password,address,permission_id) value(?,?,?,?,?,?,?)";
     public Connection getConnection(){
         Connection connection=null;
         try {
@@ -25,8 +26,25 @@ public class UserServices implements IUserServices{
     }
 
     @Override
-    public void insertUser(User user) {
+    public boolean insertUser(User user) {
+        Connection connection=getConnection();
+        boolean insertRow=false;
+        try {
+            PreparedStatement preparedStatement=connection.prepareStatement(insertUserStatement);
+            preparedStatement.setInt(1,user.getId());
+            preparedStatement.setString(2,user.getFullName());
+            preparedStatement.setString(3,user.getUserName());
+            preparedStatement.setString(4,user.getEmail());
+            preparedStatement.setString(5,user.getPassword());
+            preparedStatement.setString(6,user.getAddress());
+            preparedStatement.setInt(7,user.getPermission());
 
+            insertRow=preparedStatement.executeUpdate() > 0 ;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return insertRow;
     }
 
     @Override
@@ -64,7 +82,7 @@ public class UserServices implements IUserServices{
             PreparedStatement preparedStatement= connection.prepareStatement(selectAllUserStatement);
             ResultSet rs= preparedStatement.executeQuery();
             while(rs.next()){
-                User user=new User(rs.getInt("user_id"),rs.getString("username"),rs.getString("password"),rs.getString("email"),rs.getString("address"));
+                User user=new User(rs.getInt("user_id"),rs.getString("full_name"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("address"));
                 userList.add(user);
             }
         } catch (SQLException throwables) {

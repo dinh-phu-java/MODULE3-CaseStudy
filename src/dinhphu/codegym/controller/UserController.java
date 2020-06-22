@@ -1,5 +1,6 @@
 package dinhphu.codegym.controller;
 
+import dinhphu.codegym.model.User;
 import dinhphu.codegym.services.IUserServices;
 import dinhphu.codegym.services.UserServices;
 
@@ -44,17 +45,40 @@ public class UserController extends HttpServlet {
         String email=request.getParameter("email");
         String password=request.getParameter("password");
         String repeat_password=request.getParameter("repeat_password");
+        String address=request.getParameter("address");
+        //check email
         String emailExpression="[\\w\\d]*[\\.\\w\\d]*@[\\w]*[\\.\\w](.com||.vn||.org)";
         Boolean emailCheck= Pattern.matches(emailExpression,email);
+        //check username
         String userNameExpression="^\\w[\\w\\d]{1,19}";
         Boolean userCheck=Pattern.matches(userNameExpression,userName);
+        // check password
         String passwordExpression= "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         boolean passwordCheck= password.equals(repeat_password);
         Boolean passwordCheckExpression= Pattern.matches(passwordExpression,password);
-        ArrayList<String> message=new ArrayList<>();
 
+        ArrayList<String> message=new ArrayList<>();
+        String url="/views/register_user.jsp";
         if (emailCheck && userCheck && passwordCheck && passwordCheckExpression){
             //thuc hien dang ky
+
+            int rowCount=userServices.rowCount();
+            int userId=rowCount+1;
+            User insertUser= new User(userId,fullName,userName,email,password,address);
+            if (rowCount==0){
+                //insert luon
+                if(userServices.insertUser(insertUser)) {
+                    message.add("Inserted User Completed");
+                }else{
+                    message.add("Can't insert user");
+                }
+                url="/views/thanks.jsp";
+            }else{
+                //kiem tra ko co moi insert
+
+            }
+//            ArrayList<User>  existUserList=new ArrayList<>(userServices.selectAllUser());
+
         }else{
             if (!emailCheck){
                 message.add("Email incorrect!");
@@ -69,11 +93,8 @@ public class UserController extends HttpServlet {
                 message.add("Password length must be at least 8 characters and include upper,lower,digit and special character");
             }
         }
-        int rowCount=userServices.rowCount();
-        if (rowCount==0){
 
-        }
-        String url="/views/register_user.jsp";
+
         request.setAttribute("message",message);
         try {
             getServletContext().getRequestDispatcher(url).forward(request,response);
