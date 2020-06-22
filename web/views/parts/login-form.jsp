@@ -18,7 +18,6 @@
                         </div>
                         <!--end form-group-->
 
-
                         <div class="form-group">
                             <label for="password" class="col-form-label required">Password</label>
                             <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
@@ -26,13 +25,10 @@
                         <!--end form-group-->
 
                         <div class="d-flex justify-content-between align-items-baseline">
-                            <button type="submit" class="btn btn-outline-danger">Register</button>
+                            <button type="submit" class="btn btn-outline-danger">Login</button>
                         </div>
                     </form>
-                    <hr>
-                    <p>
-                        By clicking "Register" button, you agree with our <a href="#" class="link">Terms & Conditions.</a>
-                    </p>
+
                 </div>
                 <!--end col-md-6-->
             </div>

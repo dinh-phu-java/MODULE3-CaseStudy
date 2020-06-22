@@ -15,11 +15,13 @@
 <body>
 
 <c:import url="parts/navbar.jsp"/>
-
+<section class="container">
 <c:forEach items="${message}" var="m">
     <p>${m}</p>
 </c:forEach>
-
+    <a href="<c:url value="/register-user?action=login"/>" ><i class="fas fa-sign-in-alt"></i> Login</a>
+    <p>Session user name is: <c:out value="${sessionScope.username}"/> </p>
+</section>
 <c:import url="parts/footer.jsp"/>
 
 

@@ -2,6 +2,7 @@ package dinhphu.codegym.controller;
 
 import dinhphu.codegym.model.User;
 import dinhphu.codegym.services.IUserServices;
+import dinhphu.codegym.services.PasswordUtil;
 import dinhphu.codegym.services.UserServices;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,6 +38,53 @@ public class UserController extends HttpServlet {
     }
 
     private void loginUser(HttpServletRequest request, HttpServletResponse response) {
+        String userName= request.getParameter("userName");
+        String password=request.getParameter("password");
+
+        String emailExpression="[\\w\\d]*[\\.\\w\\d]*@[\\w]*[\\.\\w](.com||.vn||.org)";
+        String userNameExpression="^\\w[\\w\\d]{1,19}";
+
+        Boolean emailCheck= Pattern.matches(emailExpression,userName);
+        Boolean userCheck=Pattern.matches(userNameExpression,userName);
+
+        String passwordExpression= "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        Boolean passwordCheck= Pattern.matches(passwordExpression,password);
+
+        String hashPassword= PasswordUtil.hashPassword(password);
+        ArrayList<String> message= new ArrayList<>();
+        String url="/views/login.jsp";
+        if ((userCheck || emailCheck) && passwordCheck){
+            ArrayList<User> userList=new ArrayList<>(userServices.selectAllUser());
+            boolean userMatch=false;
+            for (User user : userList){
+                if ( (user.getEmail().equalsIgnoreCase(userName) || user.getUserName().equalsIgnoreCase(userName)) && user.getPassword().equalsIgnoreCase(hashPassword)){
+                    userMatch=true;
+                    break;
+                }
+            }
+            if (userMatch){
+                message.add("Login successfully!");
+                url="/views/thanks.jsp";
+                HttpSession session=request.getSession();
+                session.setMaxInactiveInterval(-1);
+                session.setAttribute("username",userName);
+            }else{
+                message.add("User name or password is nor correct");
+                url="/views/login.jsp";
+            }
+        }else{
+            message.add("User name or password format is not correct");
+            url="/views/login.jsp";
+        }
+
+        request.setAttribute("message",message);
+        try {
+            getServletContext().getRequestDispatcher(url).forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void registerUser(HttpServletRequest request, HttpServletResponse response) {
