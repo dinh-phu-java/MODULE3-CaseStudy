@@ -7,16 +7,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Car Market</title>
-<%--Import necessary Link--%>
+    <title>Complete Bootstrap 4 Website Layout</title>
+<%--    import necessary source--%>
     <c:import url="parts/head.jsp"/>
 </head>
 <body>
-<%--Top page header--%>
+<%--top-page-header--%>
 <c:import url="parts/top-page-header.jsp"/>
+
+<%--main-banner--%>
+<c:import url="parts/main-banner.jsp"/>
+
+<%--navbar--%>
+<c:import url="parts/navbar.jsp"/>
+
+<%--main-slider--%>
+<c:import url="parts/main-slider.jsp"/>
+
+<%--main-content--%>
+<c:import url="parts/main-content.jsp"/>
+
+<%--footer--%>
+<c:import url="parts/footer.jsp"/>
 
 </body>
 </html>
+

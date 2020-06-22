@@ -14,6 +14,7 @@ public class MainController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("real_path",getServletContext().getRealPath("/images/"));
 
         getServletContext().getRequestDispatcher("/views/home.jsp").forward(request,response);
     }
