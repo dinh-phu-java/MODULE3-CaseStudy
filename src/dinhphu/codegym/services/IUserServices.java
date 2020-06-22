@@ -7,7 +7,7 @@ import java.util.List;
 public interface IUserServices {
     public boolean insertUser(User user);
     public void editUser(User user);
-    public void selectUser(String token);
+    public User selectUser(String token);
     public int rowCount();
     public List<User> selectAllUser();
 }

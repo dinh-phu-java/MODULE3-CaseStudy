@@ -9,7 +9,10 @@
                     <a href="<c:url value="/register-user?action=login"/>" style="margin-left:10px"><i class="fas fa-sign-in-alt"></i> login</a>
                 </c:when>
                 <c:otherwise>
-                    <a href=""><c:out value="${sessionScope.username}" /></a>
+                    <a href=""><c:out value="${sessionScope.loginUser.userName}" /></a>
+                    <a href=""><c:out value="${sessionScope.loginUser.email}" /></a>
+                    <a href=""><c:out value="${sessionScope.loginUser.fullName}" /></a>
+                    
                 </c:otherwise>
             </c:choose>
 

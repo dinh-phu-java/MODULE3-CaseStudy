@@ -54,8 +54,29 @@ public class UserServices implements IUserServices{
     }
 
     @Override
-    public void selectUser(String token) {
-
+    public User selectUser(String token) {
+        Connection connection=getConnection();
+        User user=null;
+        String sqlStatement= "select * from users where username = ? OR email =?";
+        try {
+            PreparedStatement preparedStatement=connection.prepareStatement(sqlStatement);
+            preparedStatement.setString(1,token);
+            preparedStatement.setString(2,token);;
+            ResultSet rs= preparedStatement.executeQuery();
+            while (rs.next()){
+                int userId= rs.getInt("user_id");
+                String userName=rs.getString("username");
+                String email=rs.getString("email");
+                String password=rs.getString("password");
+                String address=rs.getString("address");
+                String fullName=rs.getString("full_name");
+                int permissionId=rs.getInt("permission_id");
+                user=new User(userId,fullName,userName,email,password,address);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
     }
     @Override
     public int rowCount(){
