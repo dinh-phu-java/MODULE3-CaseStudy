@@ -1,12 +1,23 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="content">
     <section class="block">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
-                    <form class="form clearfix">
+                    <ul style="color:red;margin-top:15px;">
+                    <c:forEach items="${message}" var="m">
+                         <li>${m}</li>
+                    </c:forEach>
+                    </ul>
+                    <form class="form clearfix" action="user-action" method="POST">
+                        <input type="hidden" name="action" value="register">
                         <div class="form-group">
-                            <label for="name" class="col-form-label required">Your Name</label>
-                            <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required>
+                            <label for="fullName" class="col-form-label required">Full Name</label>
+                            <input name="fullName" type="text" class="form-control" id="fullName" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName" class="col-form-label required">User Name</label>
+                            <input name="userName" type="text" class="form-control" id="userName" placeholder="Your Name" required>
                         </div>
                         <!--end form-group-->
                         <div class="form-group">
@@ -29,7 +40,7 @@
                                 <input type="checkbox" name="newsletter" value="1">
                                 Receive Newsletter
                             </label>
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-outline-danger">Register</button>
                         </div>
                     </form>
                     <hr>
