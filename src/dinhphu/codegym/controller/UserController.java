@@ -64,7 +64,7 @@ public class UserController extends HttpServlet {
             }
             if (userMatch){
                 message.add("Login successfully!");
-                url="/views/thanks.jsp";
+                url="/home";
                 HttpSession session=request.getSession();
                 session.setMaxInactiveInterval(-1);
                 session.setAttribute("username",userName);

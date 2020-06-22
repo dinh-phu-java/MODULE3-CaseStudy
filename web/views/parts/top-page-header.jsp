@@ -2,8 +2,17 @@
 <article id="top-page-header" class="container-fluid">
     <section class="container">
         <aside class="header-left">
-            <a href="<c:url value="/register-user?action=register-user"/>"><i class="fas fa-users-cog"></i> sign in / join</a>
-            <a href="<c:url value="/register-user?action=login"/>" style="margin-left:10px"><i class="fas fa-sign-in-alt"></i> login</a>
+
+            <c:choose>
+                <c:when test="${sessionScope.username == null}">
+                    <a href="<c:url value="/register-user?action=register-user"/>"><i class="fas fa-users-cog"></i> sign in / join</a>
+                    <a href="<c:url value="/register-user?action=login"/>" style="margin-left:10px"><i class="fas fa-sign-in-alt"></i> login</a>
+                </c:when>
+                <c:otherwise>
+                    <a href=""><c:out value="${sessionScope.username}" /></a>
+                </c:otherwise>
+            </c:choose>
+
         </aside>
         <aside class="header-right">
             <a href="#"><i class="fab fa-facebook"></i></a>

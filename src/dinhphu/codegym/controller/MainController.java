@@ -5,14 +5,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "MainController",urlPatterns={"/home","/register-user"})
 public class MainController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session=request.getSession();
+        String username=(String)session.getAttribute("username");
+        String action=request.getParameter("action");
+        String url="/views/home.jsp";
+        System.out.println(action);
+        if (action==null){
+            action="";
+        }
+        switch (action){
+            default:
+                url="/views/home.jsp";
+                break;
+        }
 
+        session.setAttribute("username",username);
+        getServletContext().getRequestDispatcher(url).forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,6 +46,7 @@ public class MainController extends HttpServlet {
             case "login":
                 url="/views/login.jsp";
                 break;
+
             default:
                 url="/views/home.jsp";
                 break;
