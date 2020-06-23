@@ -33,9 +33,10 @@ public class MainController extends HttpServlet {
                 User loginUser=userServices.selectUser(username);
                 session.setAttribute("loginUser",loginUser);
                 break;
-
+            case "edit-profile":
+                url="/views/my-profile.jsp";
+                break;
         }
-
 
         getServletContext().getRequestDispatcher(url).forward(request,response);
     }
@@ -54,13 +55,10 @@ public class MainController extends HttpServlet {
             case "login":
                 url="/views/login.jsp";
                 break;
-
             default:
                 url="/views/home.jsp";
                 break;
         }
-
         getServletContext().getRequestDispatcher(url).forward(request,response);
-
     }
 }

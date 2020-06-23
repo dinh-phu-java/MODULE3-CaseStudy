@@ -12,6 +12,7 @@ public class UserServices implements IUserServices{
     private static final String passwordHost="qazWSX1@";
     private static final String selectAllUserStatement="select * from users";
     private static final String insertUserStatement="insert into users(user_id,full_name,username,email,password,address,permission_id) value(?,?,?,?,?,?,?)";
+    private static final String updateUserProfile="update users set full_name=?, address = ? where username=?";
     public Connection getConnection(){
         Connection connection=null;
         try {
@@ -49,8 +50,20 @@ public class UserServices implements IUserServices{
     }
 
     @Override
-    public void editUser(User user) {
+    public boolean editUser(User user) {
+        boolean updateRow=false;
+        Connection connection=getConnection();
+        try {
+            PreparedStatement preparedStatement=connection.prepareStatement(updateUserProfile);
+            preparedStatement.setString(1,user.getFullName());
+            preparedStatement.setString(2,user.getAddress());
+            preparedStatement.setString(3,user.getUserName());
 
+            updateRow=preparedStatement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return updateRow;
     }
 
     @Override

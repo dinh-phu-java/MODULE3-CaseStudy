@@ -21,11 +21,11 @@ public class UserController extends HttpServlet {
     private static IUserServices userServices=new UserServices();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action=request.getParameter("action");
+        String url="/views/home.jsp";
 
         if (action==null){
             action="view";
-            String url="/views/home.jsp";
-            getServletContext().getRequestDispatcher("url").forward(request,response);
+            getServletContext().getRequestDispatcher(url).forward(request,response);
         }
         switch(action){
             case "register":
@@ -34,6 +34,50 @@ public class UserController extends HttpServlet {
             case "login":
                 loginUser(request,response);
                 break;
+            case "edit-profile":
+               editUser(request,response);
+                break;
+        }
+
+
+    }
+
+    private void editUser(HttpServletRequest request, HttpServletResponse response) {
+        String fullName=request.getParameter("fullName");
+        String address=request.getParameter("address");
+        HttpSession session=request.getSession();
+        User sessionUser=(User)session.getAttribute("loginUser");
+        boolean editBoolean=false;
+        User editUser=null;
+        ArrayList<String> message=new ArrayList<>();
+        String url="/views/home.jsp";
+        String action="";
+
+        if (fullName.equals("") || address.equals("") || fullName ==null || address==null){
+            message.add("Name or Address can't be null");
+        }else{
+            editUser=new User(sessionUser.getId(),fullName.trim(),sessionUser.getUserName(),sessionUser.getEmail(),sessionUser.getPassword(),address.trim());
+            editBoolean=userServices.editUser(editUser);
+        }
+
+
+        if (editBoolean){
+            message.add("Edit user Completed!");
+            url="/home";
+            action=request.getParameter("action");
+            session.setAttribute("loginUser",editUser);
+        }else{
+            message.add("Can't edit user!");
+            url="/views/thanks.jsp";
+        }
+        try {
+            request.setAttribute("message",message);
+            request.setAttribute("action",action);
+            getServletContext().getRequestDispatcher(url).forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -176,6 +220,21 @@ public class UserController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            String action= request.getParameter("action");
+            String url="/views/home.jsp";
+            System.out.println(action);
+            if (action==null){
+                action="views";
+            }
+            switch (action){
+                case "user-profile":
+                    url="/views/my-profile.jsp";
+                    break;
+            }
+
+            getServletContext().getRequestDispatcher(url).forward(request,response);
 
     }
+
+
 }

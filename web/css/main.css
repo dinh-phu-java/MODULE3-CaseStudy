@@ -220,3 +220,27 @@ nav .my-nav-child  .dropdown-menu {
 }
 /*end footer*/
 
+/*start my profile */
+
+nav.side-nav a{
+    border-bottom:0.1rem solid rgba(0,0,0,0.1);
+    padding:0.8rem 0 0.8rem 0;
+    color:#000;
+    transition: 0.3s color ease;
+    font-size:0.8rem;
+}
+
+nav.side-nav .fa-heart ,nav.side-nav .fa-user ,nav.side-nav .fa-star, nav.side-nav .fa-recycle, nav.side-nav .fa-check{
+    font-size:15px;
+    padding-right:5px;
+}
+
+nav.side-nav a:hover{
+    color:#ef3726;
+}
+nav.side-nav a:hover{
+    color:#ef3726;
+}
+
+
+/*end my profile */

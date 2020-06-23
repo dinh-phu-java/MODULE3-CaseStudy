@@ -12,7 +12,7 @@
 <%--                    <a href=""><c:out value="${sessionScope.loginUser.userName}" /></a>--%>
 <%--                    <a href=""><c:out value="${sessionScope.loginUser.email}" /></a>--%>
 <%--                    <a href=""><c:out value="${sessionScope.loginUser.fullName}" /></a>--%>
-                    <a href='<c:url value="/user-control?action=user-profile&id=${sessionScope.loginUser.id}"/>'><i class="fas fa-user"></i> User Profile</a>
+                    <a href='<c:url value="/user-control?action=user-profile"/>'><i class="fas fa-user"></i> ${sessionScope.loginUser.fullName}</a>
                 </c:otherwise>
             </c:choose>
 
