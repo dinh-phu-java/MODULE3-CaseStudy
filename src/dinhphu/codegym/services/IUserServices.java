@@ -10,4 +10,5 @@ public interface IUserServices {
     public User selectUser(String token);
     public int rowCount();
     public List<User> selectAllUser();
+    public boolean updatePassword(User user , String newPassword);
 }

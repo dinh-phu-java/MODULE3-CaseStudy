@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -37,9 +38,62 @@ public class UserController extends HttpServlet {
             case "edit-profile":
                editUser(request,response);
                 break;
+            case "change-password":
+                changePassword(request,response);
+                break;
         }
 
 
+    }
+
+    private void changePassword(HttpServletRequest request, HttpServletResponse response) {
+        String currentPassword=request.getParameter("currentPassword");
+        String hashPassword=PasswordUtil.hashPassword(currentPassword);
+        String newPassword=request.getParameter("newPassword");
+        String confirmNewPassword=request.getParameter("confirmNewPassword");
+        HttpSession session=request.getSession();
+        User loginUser=(User)session.getAttribute("loginUser");
+        String username=loginUser.getUserName();
+        ArrayList<User> allUser=new ArrayList<>(userServices.selectAllUser()) ;
+        ArrayList<String> message=new ArrayList<>();
+        boolean findUser=false;
+        for (User user:allUser){
+            if (username.equals(user.getUserName()) && hashPassword.equals(user.getPassword())){
+                findUser=true;
+                break;
+            }
+        }
+
+        if (findUser){
+
+            String passwordExpression= "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+            Boolean passwordCheck= Pattern.matches(passwordExpression,newPassword);
+            if (passwordCheck && (newPassword.equals(confirmNewPassword))){
+                String hashNewPassword=PasswordUtil.hashPassword(newPassword);
+                if (userServices.updatePassword(loginUser,hashNewPassword)){
+                    message.add("Edit password Completed!");
+                }else{
+                    message.add("Can't edit password!");
+                }
+
+            }else{
+                message.add("Password length must be at least 8 characters and include upper,lower,digit and special character");
+                message.add("new Password is not match!");
+            }
+
+        }else{
+            message.add("Current password is not correct!");
+        }
+
+        request.setAttribute("message",message);
+        String url="/views/change-password.jsp";
+        try {
+            getServletContext().getRequestDispatcher(url).forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void editUser(HttpServletRequest request, HttpServletResponse response) {
@@ -237,7 +291,9 @@ public class UserController extends HttpServlet {
                     session.removeAttribute("username");
                     session.removeAttribute("loginUser");
                     break;
-
+                case "change-password":
+                    url="/views/change-password.jsp";
+                    break;
             }
 
             getServletContext().getRequestDispatcher(url).forward(request,response);

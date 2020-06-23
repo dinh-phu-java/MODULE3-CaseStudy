@@ -10,7 +10,7 @@
         <a class="nav-link icon" href="bookmarks.html">
             <i class="fa fa-star"></i>Bookmarks
         </a>
-        <a class="nav-link icon" href="<c:url value="/user-control?action=change-password">">
+        <a class="nav-link icon" href='<c:url value="/user-control?action=change-password"/>'>
             <i class="fa fa-recycle"></i>Change Password
         </a>
         <a class="nav-link icon" href="sold-items.html">

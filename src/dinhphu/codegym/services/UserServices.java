@@ -125,4 +125,20 @@ public class UserServices implements IUserServices{
         }
         return userList;
     }
+    @Override
+    public boolean updatePassword(User user , String newPassword){
+        boolean updatePassword=false;
+        Connection connection=getConnection();
+        String sqlStatement= "update users set password=? where username=?";
+        try {
+            PreparedStatement preparedStatement=connection.prepareStatement(sqlStatement);
+            preparedStatement.setString(1,newPassword);
+            preparedStatement.setString(2,user.getUserName());
+
+            updatePassword=preparedStatement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return updatePassword;
+    }
 }
