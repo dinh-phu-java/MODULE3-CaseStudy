@@ -15,7 +15,26 @@
 <body>
 <c:import url="parts/navbar.jsp"/>
 
-<c:import url="parts/my-profile-form.jsp"/>
+
+
+<section class="content">
+    <section class="block">
+        <div class="container">
+            <div class="row">
+
+                <c:import url="parts/profile-sidebar.jsp"/>
+
+                <!--end col-md-3-->
+                <c:import url="parts/my-profile-form.jsp"/>
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </section>
+    <!--end block-->
+
+</section>
+<!--end content-->
 
 <c:import url="parts/footer.jsp"/>
 </body>
