@@ -68,7 +68,8 @@ public class UserController extends HttpServlet {
             session.setAttribute("loginUser",editUser);
         }else{
             message.add("Can't edit user!");
-            url="/views/thanks.jsp";
+            action=request.getParameter("action");
+            url="/home";
         }
         try {
             request.setAttribute("message",message);
@@ -113,7 +114,7 @@ public class UserController extends HttpServlet {
                 session.setMaxInactiveInterval(-1);
                 session.setAttribute("username",userName);
             }else{
-                message.add("User name or password is nor correct");
+                message.add("User name or password is not correct");
                 url="/views/login.jsp";
             }
         }else{
@@ -230,6 +231,13 @@ public class UserController extends HttpServlet {
                 case "user-profile":
                     url="/views/my-profile.jsp";
                     break;
+                case "user-logout":
+                    url="/views/home.jsp";
+                    HttpSession session=request.getSession();
+                    session.removeAttribute("username");
+                    session.removeAttribute("loginUser");
+                    break;
+
             }
 
             getServletContext().getRequestDispatcher(url).forward(request,response);

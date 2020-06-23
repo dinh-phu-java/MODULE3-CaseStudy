@@ -10,11 +10,14 @@
         <a class="nav-link icon" href="bookmarks.html">
             <i class="fa fa-star"></i>Bookmarks
         </a>
-        <a class="nav-link icon" href="change-password.html">
+        <a class="nav-link icon" href="<c:url value="/user-control?action=change-password">">
             <i class="fa fa-recycle"></i>Change Password
         </a>
         <a class="nav-link icon" href="sold-items.html">
             <i class="fa fa-check"></i>Sold Items
+        </a>
+        <a class="nav-link icon" href='<c:url value="/user-control?action=user-logout"/>' >
+            <i class="fas fa-sign-out-alt"></i>Logout
         </a>
     </nav>
 </div>
