@@ -86,7 +86,7 @@ public class UserController extends HttpServlet {
         }
 
         request.setAttribute("message",message);
-        String url="/views/change-password.jsp";
+        String url="/views/change_password.jsp";
         try {
             getServletContext().getRequestDispatcher(url).forward(request,response);
         } catch (ServletException e) {
@@ -283,7 +283,7 @@ public class UserController extends HttpServlet {
             }
             switch (action){
                 case "user-profile":
-                    url="/views/my-profile.jsp";
+                    url="/views/my_profile.jsp";
                     break;
                 case "user-logout":
                     url="/views/home.jsp";
@@ -292,7 +292,7 @@ public class UserController extends HttpServlet {
                     session.removeAttribute("loginUser");
                     break;
                 case "change-password":
-                    url="/views/change-password.jsp";
+                    url="/views/change_password.jsp";
                     break;
             }
 

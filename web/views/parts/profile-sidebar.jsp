@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="col-md-3">
+
     <nav class="nav flex-column side-nav">
+        <a class="nav-link icon" href="<c:url value="/home"/>">
+            <i class="fa fa-home"></i> Home
+        </a>
         <a class="nav-link active icon" href="<c:url value="/user-control?action=user-profile"/>">
             <i class="fa fa-user"></i>My Profile
         </a>
@@ -20,4 +23,3 @@
             <i class="fas fa-sign-out-alt"></i>Logout
         </a>
     </nav>
-</div>
