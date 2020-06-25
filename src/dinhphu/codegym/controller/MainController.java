@@ -56,7 +56,7 @@ public class MainController extends HttpServlet {
                 url="/views/login.jsp";
                 break;
             default:
-                url="/views/add_car.jsp";
+                url="/views/home.jsp";
                 break;
         }
         getServletContext().getRequestDispatcher(url).forward(request,response);

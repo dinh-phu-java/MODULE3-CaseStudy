@@ -294,6 +294,9 @@ public class UserController extends HttpServlet {
                 case "change-password":
                     url="/views/change_password.jsp";
                     break;
+                case "add-car":
+                    url="/views/add_car.jsp";
+                    break;
             }
 
             getServletContext().getRequestDispatcher(url).forward(request,response);
