@@ -6,9 +6,9 @@ import dinhphu.codegym.model.User;
 import java.util.List;
 
 public interface IProductServices {
-    public boolean insertProduct(User user);
-    public boolean editProduct(User user);
-    public User selectProduct(String token);
+    public boolean insertProduct(Product product);
+    public boolean editProduct(Product product);
+    public Product selectProduct(String token);
     public int rowCount();
     public List<Product> selectAllProduct();
 

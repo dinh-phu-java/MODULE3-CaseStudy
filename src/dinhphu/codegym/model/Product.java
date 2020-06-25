@@ -4,50 +4,61 @@ public class Product {
     int car_id;
     int user_id;
     int image_id;
-    String engine_type_id;
-    String gear_id;
-    String front_wheel_id;
-    String fuel_type_id;
-    String valves_id;
+    String engine_type;
+    String gear;
+    String front_wheel;
+    String fuel_type;
+    String valves;
     double car_price;
     String description;
     String post_date;
     String date_of_manufacture;
     String vendor;
     String car_type;
+    String car_name;
 
-    public Product(int car_id, int user_id, int image_id, String engine_type_id, String gear_id, String front_wheel_id, String fuel_type_id, String valves_id, double car_price, String description, String post_date, String date_of_manufacture, String vendor, String car_type) {
+    public Product(int car_id, int user_id, int image_id, String engine_type, String gear, String front_wheel, String fuel_type, String valves, double car_price, String description, String post_date, String date_of_manufacture, String vendor, String car_type,String car_name) {
         this.car_id = car_id;
         this.user_id = user_id;
         this.image_id = image_id;
-        this.engine_type_id = engine_type_id;
-        this.gear_id = gear_id;
-        this.front_wheel_id = front_wheel_id;
-        this.fuel_type_id = fuel_type_id;
-        this.valves_id = valves_id;
+        this.engine_type = engine_type;
+        this.gear = gear;
+        this.front_wheel = front_wheel;
+        this.fuel_type = fuel_type;
+        this.valves = valves;
         this.car_price = car_price;
         this.description = description;
         this.post_date = post_date;
         this.date_of_manufacture = date_of_manufacture;
         this.vendor = vendor;
         this.car_type = car_type;
+        this.car_name=car_name;
     }
 
-    public Product(int user_id, int image_id, String engine_type_id, String gear_id, String front_wheel_id, String fuel_type_id, String valves_id, double car_price, String description, String post_date, String date_of_manufacture, String vendor, String car_type) {
+    public Product(int user_id, int image_id, String engine_type, String gear, String front_wheel, String fuel_type, String valves, double car_price, String description, String post_date, String date_of_manufacture, String vendor, String car_type,String car_name) {
         car_id=0;
         this.user_id = user_id;
         this.image_id = image_id;
-        this.engine_type_id = engine_type_id;
-        this.gear_id = gear_id;
-        this.front_wheel_id = front_wheel_id;
-        this.fuel_type_id = fuel_type_id;
-        this.valves_id = valves_id;
+        this.engine_type = engine_type;
+        this.gear = gear;
+        this.front_wheel = front_wheel;
+        this.fuel_type = fuel_type;
+        this.valves = valves;
         this.car_price = car_price;
         this.description = description;
         this.post_date = post_date;
         this.date_of_manufacture = date_of_manufacture;
         this.vendor = vendor;
         this.car_type = car_type;
+        this.car_name=car_name;
+    }
+
+    public String getCar_name() {
+        return car_name;
+    }
+
+    public void setCar_name(String car_name) {
+        this.car_name = car_name;
     }
 
     public int getCar_id() {
@@ -74,44 +85,44 @@ public class Product {
         this.image_id = image_id;
     }
 
-    public String getEngine_type_id() {
-        return engine_type_id;
+    public String getEngine_type() {
+        return engine_type;
     }
 
-    public void setEngine_type_id(String engine_type_id) {
-        this.engine_type_id = engine_type_id;
+    public void setEngine_type(String engine_type) {
+        this.engine_type = engine_type;
     }
 
-    public String getGear_id() {
-        return gear_id;
+    public String getGear() {
+        return gear;
     }
 
-    public void setGear_id(String gear_id) {
-        this.gear_id = gear_id;
+    public void setGear(String gear) {
+        this.gear = gear;
     }
 
-    public String getFront_wheel_id() {
-        return front_wheel_id;
+    public String getFront_wheel() {
+        return front_wheel;
     }
 
-    public void setFront_wheel_id(String front_wheel_id) {
-        this.front_wheel_id = front_wheel_id;
+    public void setFront_wheel(String front_wheel) {
+        this.front_wheel = front_wheel;
     }
 
-    public String getFuel_type_id() {
-        return fuel_type_id;
+    public String getFuel_type() {
+        return fuel_type;
     }
 
-    public void setFuel_type_id(String fuel_type_id) {
-        this.fuel_type_id = fuel_type_id;
+    public void setFuel_type(String fuel_type) {
+        this.fuel_type = fuel_type;
     }
 
-    public String getValves_id() {
-        return valves_id;
+    public String getValves() {
+        return valves;
     }
 
-    public void setValves_id(String valves_id) {
-        this.valves_id = valves_id;
+    public void setValves(String valves) {
+        this.valves = valves;
     }
 
     public double getCar_price() {

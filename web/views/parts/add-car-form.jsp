@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -12,8 +13,13 @@
 <section class="content">
     <div class="row">
         <div class="col-md-12">
+            <ul>
+            <c:forEach items="${messages}" var="message">
+                <li>${message}</li>
+            </c:forEach>
+            </ul>
             <form action="product-controller" method="POST">
-                <input type="text" name="action" value="add-car">
+                <input type="hidden" name="action" value="add-car">
                 <div class="form-group">
                     <label>Engine Type</label>
                     <select name="engine_type" class="form-control">
@@ -58,36 +64,47 @@
                 <div class="form-group">
                     <label>Valves</label>
                     <select name="valves" class="form-control">
-                        <option value="gasoline">Gasoline</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="liquefied">Liquefied</option>
-                        <option value="petroleum">Petroleum</option>
-                        <option value="compressed">Compressed</option>
-                        <option value="natural gas">Natural Gas</option>
-                        <option value="ethanol">Ethanol</option>
+                        <option value="6 speed">6 Speed</option>
+                        <option value="5 speed">5 Speed</option>
+                        <option value="4 speed">4 Speed</option>
+
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label >Car Price</label>
-                    <input type="text" class="form-control" name="price" placeholder="Price">
+                    <input type="text" class="form-control" name="price" placeholder="Price" required>
                 </div>
 
                 <div class="form-group">
                     <label >Date Of Manufacture</label>
-                    <input type="date" name="date_of_manufacture" class="form-control" >
+                    <input type="date" name="date_of_manufacture" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label >Vendor</label>
-                    <input type="text" name="vendor" class="form-control" >
+                    <input type="text" name="vendor" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <label >Car Type</label>
-                    <input type="text" name="car_type" class="form-control" >
+                    <label>Car Type</label>
+                    <select name="car_type" class="form-control">
+                        <option value="4 Door Sedans">4-Door Sedans</option>
+                        <option value="2 Door Coupes">2-Door Coupes</option>
+                        <option value="Station Wagons">Liquefied</option>
+                        <option value="Convertibles">Petroleum</option>
+                        <option value="Sports Cars">Sports Cars</option>
+                        <option value="Mini Vans">Mini-Vans</option>
+                        <option value="suvs">SUVs</option>
+                        <option value="Pickup Trucks">Pickup Trucks</option>
+                        <option value="Vans">Vans</option>
+                    </select>
                 </div>
 
+                <div class="form-group">
+                    <label >Car Name</label>
+                    <input type="text" name="car_name" class="form-control" required>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Image upload</label>
                     <div class="input-group">
