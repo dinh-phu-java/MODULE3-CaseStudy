@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ProductServices implements IProductServices{
 
+
     @Override
     public boolean insertProduct(User user) {
         return false;

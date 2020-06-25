@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <form action="product-controller" method="POST">
-
+                <input type="text" name="action" value="add-car">
                 <div class="form-group">
                     <label>Engine Type</label>
                     <select name="engine_type" class="form-control">

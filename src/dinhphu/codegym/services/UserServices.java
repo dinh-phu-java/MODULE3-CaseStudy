@@ -7,28 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServices implements IUserServices{
-    private static final String dbURL= "jdbc:mysql://localhost:3306/carcompany";
-    private static final String userHost="root";
-    private static final String passwordHost="qazWSX1@";
+
     private static final String selectAllUserStatement="select * from users";
     private static final String insertUserStatement="insert into users(user_id,full_name,username,email,password,address,permission_id) value(?,?,?,?,?,?,?)";
     private static final String updateUserProfile="update users set full_name=?, address = ? where username=?";
-    public Connection getConnection(){
-        Connection connection=null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection= DriverManager.getConnection(dbURL,userHost,passwordHost);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return connection;
-    }
+
 
     @Override
     public boolean insertUser(User user) {
-        Connection connection=getConnection();
+        Connection connection= DatabaseConnection.getConnection();
         boolean insertRow=false;
         try {
             String hashPassword=PasswordUtil.hashPassword(user.getPassword());
@@ -52,7 +39,7 @@ public class UserServices implements IUserServices{
     @Override
     public boolean editUser(User user) {
         boolean updateRow=false;
-        Connection connection=getConnection();
+        Connection connection=DatabaseConnection.getConnection();
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(updateUserProfile);
             preparedStatement.setString(1,user.getFullName());
@@ -68,7 +55,7 @@ public class UserServices implements IUserServices{
 
     @Override
     public User selectUser(String token) {
-        Connection connection=getConnection();
+        Connection connection=DatabaseConnection.getConnection();
         User user=null;
         String sqlStatement= "select * from users where username = ? OR email =?";
         try {
@@ -94,7 +81,7 @@ public class UserServices implements IUserServices{
     @Override
     public int rowCount(){
         int rowCount=-1;
-        Connection connection=getConnection();
+        Connection connection=DatabaseConnection.getConnection();
         String sqlStatement = "select count(*) as row_count from users";
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(sqlStatement);
@@ -112,7 +99,7 @@ public class UserServices implements IUserServices{
     @Override
     public List<User> selectAllUser(){
         ArrayList<User> userList= new ArrayList<>();
-        Connection connection=getConnection();
+        Connection connection=DatabaseConnection.getConnection();
         try {
             PreparedStatement preparedStatement= connection.prepareStatement(selectAllUserStatement);
             ResultSet rs= preparedStatement.executeQuery();
@@ -128,7 +115,7 @@ public class UserServices implements IUserServices{
     @Override
     public boolean updatePassword(User user , String newPassword){
         boolean updatePassword=false;
-        Connection connection=getConnection();
+        Connection connection=DatabaseConnection.getConnection();
         String sqlStatement= "update users set password=? where username=?";
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(sqlStatement);
