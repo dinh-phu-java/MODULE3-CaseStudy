@@ -6,7 +6,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="font_awesome/js/all.js"></script>
 <link href="font_awesome/css/all.css" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css" type="text/css">
+
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=PT+Sans&display=swap" rel="stylesheet">
 
 
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="text_editor/summernote/summernote-bs4.css">
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-
+<link rel="stylesheet" href="css/main.css" type="text/css">
 <%--    <script src="text_editor/jquery/jquery.min.js"></script>--%>
     <!-- Bootstrap 4 -->
     <script src="text_editor/bootstrap/js/bootstrap.bundle.min.js"></script>
