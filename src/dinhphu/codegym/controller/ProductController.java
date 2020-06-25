@@ -1,6 +1,7 @@
 package dinhphu.codegym.controller;
 
 import dinhphu.codegym.model.Product;
+import dinhphu.codegym.model.User;
 import dinhphu.codegym.services.ProductServices;
 
 import javax.servlet.ServletException;
@@ -8,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "ProductController",urlPatterns="/product-controller")
 public class ProductController extends HttpServlet {
@@ -37,7 +40,7 @@ public class ProductController extends HttpServlet {
         String front_wheel=request.getParameter("front-wheel");
         String fuel_type=request.getParameter("fuel-type");
         String valves= request.getParameter("valves");
-        double price=Double.parseDouble(request.getParameter("price"));
+
         String description=request.getParameter("description");
         String date_of_manufacture= request.getParameter("date_of_manufacture");
         String vendor=request.getParameter("vendor");
@@ -46,20 +49,33 @@ public class ProductController extends HttpServlet {
 
         String url="/views/add_car.jsp";
         ArrayList<String> messages=new ArrayList<>();
-        Product car=new Product(0,1,1,engine_type,gear,front_wheel,fuel_type,valves,price,description,date_of_manufacture,date_of_manufacture,vendor,car_type,car_name);
-        if (productServices.insertProduct(car)){
-            messages.add("Add Car Completed!");
+        HttpSession session=request.getSession();
+        User loginUser=(User)session.getAttribute("loginUser");
+
+        String numberRegex= "^\\d[\\d]{1,20}\\.[\\d]{1,20}";
+        boolean checkNumberBoolean= Pattern.matches(numberRegex,request.getParameter("price"));
+        if (checkNumberBoolean){
+
+            double price=Double.parseDouble(request.getParameter("price"));
+            Product car=new Product(0,loginUser.getId(),1,engine_type,gear,front_wheel,fuel_type,valves,price,description,date_of_manufacture,date_of_manufacture,vendor,car_type,car_name);
+            if (productServices.insertProduct(car,loginUser.getId())){
+                messages.add("Add Car Completed!");
+            }else{
+                messages.add("Can't add car");
+            }
         }else{
-            messages.add("Can't add car");
+            messages.add("Price should be a number!");
         }
-        request.setAttribute("messages",messages);
-        try {
-            getServletContext().getRequestDispatcher(url).forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+            request.setAttribute("messages",messages);
+            try {
+                getServletContext().getRequestDispatcher(url).forward(request,response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
     }
 

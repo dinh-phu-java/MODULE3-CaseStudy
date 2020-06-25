@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ProductServices implements IProductServices{
     private static final String selectAllProductStatement="select * from car";
-    private static final String insertProductStatement="insert into car(car_id,user_id,image_id,engine_type,gear,front_wheel,fuel_type,valves,car_price,description,post_date,date_of_manufacture,vendor,car_type,car_name) value(1,1,1,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String insertProductStatement="insert into car(image_id,engine_type,gear,front_wheel,fuel_type,valves,car_price,description,post_date,date_of_manufacture,vendor,car_type,car_name,user_id) value(1,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String updateProduct="update users set full_name=?, address = ? where username=?";
 
     @Override
-    public boolean insertProduct(Product product) {
+    public boolean insertProduct(Product product,int userId) {
         Connection connection= DatabaseConnection.getConnection();
         boolean insertRow=false;
         try {
@@ -32,6 +32,7 @@ public class ProductServices implements IProductServices{
             preparedStatement.setString(10,product.getVendor());
             preparedStatement.setString(11,product.getCar_type());
             preparedStatement.setString(12,product.getCar_name());
+            preparedStatement.setInt(13,userId);
 
             insertRow=preparedStatement.executeUpdate() > 0 ;
 
